@@ -73,3 +73,44 @@ def delete():
 
     save_data()
     update_list()
+
+#main
+# окно
+root = tk.Tk()
+root.title("Expense Tracker")
+root.geometry("400x450")
+
+# ввод
+tk.Label(root, text="Description").pack()
+desc_entry = tk.Entry(root)
+desc_entry.pack()
+
+tk.Label(root, text="Amount").pack()
+amount_entry = tk.Entry(root)
+amount_entry.pack()
+
+# категории
+tk.Label(root, text="Category").pack()
+category_var = tk.StringVar()
+category_var.set("Food")
+
+categories = ["Food", "Transport", "Shopping", "Other"]
+tk.OptionMenu(root, category_var, *categories).pack()
+
+# кнопки
+tk.Button(root, text="Add", command=add).pack(pady=5)
+tk.Button(root, text="Delete", command=delete).pack(pady=5)
+
+# список
+listbox = tk.Listbox(root)
+listbox.pack(fill="both", expand=True, pady=10)
+
+# итог
+total_label = tk.Label(root, text="Total: $0")
+total_label.pack()
+
+# загрузка данных при запуске
+load_data()
+update_list()
+
+root.mainloop()
